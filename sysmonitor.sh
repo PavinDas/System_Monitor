@@ -3,7 +3,7 @@
 BACKUP_SRC="/home/pavin/Panda/Python/"
 LOG_FILE="/var/log/system_health.log"
 
-# Function to log messages with timestamp
+# log messages with timestamp
 log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
@@ -17,7 +17,7 @@ monitor_cpu_memory() {
     log_message "Memory Usage: $mem_usage"
 }
 
-# Top 5 Memory-consuming Processes
+# Top 5 Processes
 list_top_processes() {
     log_message "Top 5 Memory-Consuming Processes:"
     ps aux --sort=-%mem | awk 'NR<=5{print $0}' | tee -a "$LOG_FILE"
@@ -49,7 +49,6 @@ backup_files() {
     log_message "Backup completed to $BACKUP_DEST"
 }
 
-# Main Function
 main() {
     log_message "Starting System Health Check..."
     monitor_cpu_memory
